@@ -1,0 +1,8 @@
+'use strict';
+
+angular.module('scraper').controller('main', function ($scope) {
+	var vm = this;
+
+	vm.world = 'hello';
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9zY3JpcHRzL21haW4uY29udHJvbGxlci5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLE9BQU8sQ0FDTCxNQUFNLENBQUMsU0FBUyxDQUFDLENBRWpCLFVBQVUsQ0FBQyxNQUFNLEVBQUUsVUFBUyxNQUFNLEVBQUU7QUFDcEMsS0FBSSxFQUFFLEdBQUcsSUFBSSxDQUFDOztBQUVkLEdBQUUsQ0FBQyxLQUFLLEdBQUcsT0FBTyxDQUFBO0NBQ2xCLENBQUMsQ0FBQSIsImZpbGUiOiJtYWluLmNvbnRyb2xsZXIuanMiLCJzb3VyY2VzQ29udGVudCI6WyJhbmd1bGFyXG5cdC5tb2R1bGUoJ3NjcmFwZXInKVxuXG5cdC5jb250cm9sbGVyKCdtYWluJywgZnVuY3Rpb24oJHNjb3BlKSB7XG5cdFx0dmFyIHZtID0gdGhpcztcblxuXHRcdHZtLndvcmxkID0gJ2hlbGxvJ1xuXHR9KSJdfQ==

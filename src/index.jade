@@ -1,0 +1,16 @@
+html(ng-app="scraper")
+	head
+		
+		base(href="/")
+		meta(charset="utf-8")
+		meta(http-equiv="X-UA-Compatible", content="IE=edge")
+		title
+			|Transport Works : Scraper
+		meta(name="description", content="Transport Works US Web Scraper")
+		meta(name="viewport", content="width=device-width, initial-scale=1, user-scalable=no")
+		
+	body
+		ui-view
+	script(src="./lib/build.js")
+	script(src="./scripts/config.js")
+	script(src="./scripts/main.controller.js")
