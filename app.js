@@ -10,7 +10,7 @@ var app = express();
 // // ROUTE REQUIRES
 // var userAuthentication = require('./routes/users')
 // var bundle = require('./routes/bundle')
-// var scraper = require('./routes/scraper')
+var scraper = require('./routes/scraper')
 // var tag = require('./routes/tag')
 
 
@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // // PRE-LOGIN ENDPOINTS
 // app.use('/api', userAuthentication)
-// app.use('/api', scraper)
+app.use('/api', scraper)
 // app.use('/api', bundle)
 // app.use('/api', tag)
 

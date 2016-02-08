@@ -1,1 +1,68 @@
-h1 Hello World
+.row
+  .col-md-3
+    h3 Select Order file
+    input(type='file', nv-file-select='', uploader='uploader')
+  .col-md-9(style='margin-bottom: 40px')
+    h3 File queue
+    p Queue length: {{ uploader.queue.length }}
+    table.table
+      thead
+        tr
+          th(width='50%') Name
+          th(ng-show='uploader.isHTML5') Size
+          th(ng-show='uploader.isHTML5') Progress
+          th Status
+          th Actions
+      tbody
+        tr(ng-repeat='item in uploader.queue')
+          td
+            strong {{ item.file.name }}
+          td(ng-show='uploader.isHTML5', nowrap='') {{ item.file.size/1024/1024|number:2 }} MB
+          td(ng-show='uploader.isHTML5')
+            .progress(style='margin-bottom: 0;')
+              .progress-bar(role='progressbar', ng-style="{ 'width': item.progress + '%' }")
+          td.text-center
+            span(ng-show='item.isSuccess')
+              i.glyphicon.glyphicon-ok
+            span(ng-show='item.isCancel')
+              i.glyphicon.glyphicon-ban-circle
+            span(ng-show='item.isError')
+              i.glyphicon.glyphicon-remove
+          td(nowrap='')
+            button.btn.btn-success.btn-xs(type='button', ng-click='item.upload()', ng-disabled='item.isReady || item.isUploading || item.isSuccess')
+              span.glyphicon.glyphicon-upload
+              |  Upload
+            button.btn.btn-warning.btn-xs(type='button', ng-click='item.cancel()', ng-disabled='!item.isUploading')
+              span.glyphicon.glyphicon-ban-circle
+              |  Cancel
+            button.btn.btn-danger.btn-xs(type='button', ng-click='item.remove()')
+              span.glyphicon.glyphicon-trash
+              |  Remove
+    div
+      div
+        | Queue progress:
+        .progress(style='')
+          .progress-bar(role='progressbar', ng-style="{ 'width': uploader.progress + '%' }")
+hr
+//- form(action='', method='post', enctype='multipart/form-data')
+//- 	.form-group
+//- 		label(for='excel_file') Excel File
+//- 		input(type='file', name='excel_file', accept='.xlsx', onchange='angular.element(this).scope().fileChanged(this.files);', required='true')
+//- 	.checkbox
+//- 		label
+//- 		input(type='checkbox', ng-model='showPreview', ng-change='showPreviewChanged();')
+//- 		| Show preview of excel file
+//- 	.form-group
+//- 		label(for='sheet_name') Sheet Name
+//- 		select#sheet_name.form-control(ng-model='selectedSheetName', required='true', ng-required='true', ng-options='sheetName as sheetName for (shesheetData) in sheets')
+//- 		option(value='') ---- Select a sheet ----
+//- 	input(type='hidden', name='sheet_name', value='{{ selectedSheetName }}')
+//- 	input(type='submit', value='Submit')
+//- 	div(ng-show='showPreview')
+//- 		table.table.table-bordered(ng-repeat='(sheetName, sheetData) in sheets', ng-show='sheetName == selectedSheetName')
+//- 			thead
+//- 				tr
+//- 					th(ng-bind='sheetName')
+//- 				tr(ng-repeat='row in sheetData.data')
+//- 					td(ng-repeat='col in row', ng-bind='col')
+

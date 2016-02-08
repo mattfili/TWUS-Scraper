@@ -1,6 +1,5 @@
 html(ng-app="scraper")
 	head
-		
 		base(href="/")
 		meta(charset="utf-8")
 		meta(http-equiv="X-UA-Compatible", content="IE=edge")
@@ -8,9 +7,15 @@ html(ng-app="scraper")
 			|Transport Works : Scraper
 		meta(name="description", content="Transport Works US Web Scraper")
 		meta(name="viewport", content="width=device-width, initial-scale=1, user-scalable=no")
+		link(rel='stylesheet', href='./lib/build.css')
+		link(rel='stylesheet', href='css/main.css')
 		
 	body
 		ui-view
 	script(src="./lib/build.js")
+	//- script(src="./scripts/jszip.js")
+	//- script(src="./scripts/xlxs.js")
+	//- script(src="./scripts/xlxs-reader.js")
 	script(src="./scripts/config.js")
+	script(src="./scripts/app-services.js")
 	script(src="./scripts/main.controller.js")
