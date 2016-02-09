@@ -7,87 +7,76 @@ var _ = require('lodash');
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 var Excel = require("exceljs");
-var url = require('url')
-var multer  = require('multer')
-var upload = multer({ dest: 'uploads/' })
-var phantom = require('phantom');
+var multer  = require('multer');
+var upload = multer({ dest: 'uploads/' });
+var starTrack = require('../model/commHandler');
+var async = require('async');
+var json2xls = require('json2xls');
+var express = require('express');
+var XLSX = require('xlsx');
+
 
 
 var router = express.Router();
 
 router.post('/load', multipartMiddleware, function (req, res, next) {
 
-	var url = 'http://sttrackandtrace.startrack.com.au/'
+	async.waterfall([
+		function (callback) {
+			var workbook = new Excel.Workbook();
+			workbook.xlsx.readFile(req.files.file.path)
 
-	var workbook = new Excel.Workbook();
+		    .then(function() {
 
-	workbook.xlsx.readFile(req.files.file.path)
+		    	var worksheet = workbook.getWorksheet(1)
+		        var colH = worksheet.getColumn(8)
+		        var data = [];
 
+		        colH.eachCell(function(cell, rowNumber) {
 
-    .then(function() {
-    	// grab the workbook
-    	var worksheet = workbook.getWorksheet(1)
+		        	var conNoteNumber = cell.value
 
-    	// grab col H and iterate through the values 
-        var hCol = worksheet.getColumn(8)
-        hCol.eachCell(function(cell, rowNumber) {
-        	var conNote = cell.values
+		        	starTrack.getGuid(conNoteNumber, function (guid) {
 
-        	phantom.create(function(ph) {
-  				return ph.createPage(function(page) {
- 
-				    //From here on in, we can use PhantomJS' API methods
-				    return page.open(url + conNote, function(status) {
-			            //The page is now open      
-			            console.log("opened site? ", status);
-			            page.injectJs('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js', function() {
+		        		starTrack.getConEvents(guid[0], function (events) {
 
-			            		setTimeout(function() {
-								    return page.evaluate(function() {
-								 
-								        // //Get what you want from the page using jQuery. 
-								        // //A good way is to populate an object with all the jQuery commands that you need and then return the object.
-								 
-								        // var h2Arr = [], //array that holds all html for h2 elements
-								        // pArr = []; //array that holds all html for p elements
-								 
-								        // //Populate the two arrays
-								        // $('h2').each(function() {
-								        //     h2Arr.push($(this).html());
-								        // });
-								 
-								        // $('p').each(function() {
-								        //     pArr.push($(this).html());
-								        // });
-								 
-								        // //Return this data
-								        // return {
-								        //     h2: h2Arr,
-								        //     p: pArr
-								        // }
+		        		var last =	_.last(events)
+		 
+		        			starTrack.getConSummary(guid[0], function (summary) {
 
+		        				var conData = {
+		        					rowNum: rowNumber,
+									conNum: conNoteNumber,
+									date: last['EventDate'],
+									time: last['Time'],
+									location: last['Location'],
+									status: last['Status'],
+									time: last['Time'],
+									summary: summary['StatusDescription']
+		        				}
+		        				data.push(conData)       	
 
-								        return $('#ConsignmentScans tbody tr:last td').text()
-								    }, function(result) {
-								        console.log(result); //Log out the data.
-								        ph.exit();
-								    });
-								}, 5000);
+		        				var xls = json2xls(data);
+								fs.writeFileSync(__dirname+ 'data.xlsx', xls, 'binary')
 
-			            });
- 
-        			});
-    			});
-			});
+		        				callback(null, data)
+		        			})
+		        		})
+		        	})
+		        })
+		    })
+		}
 
+	], function (err, data) {
+		// console.log(bundle)
+		if (err) return next(err);
+		// console.log(data)
+		res.send(200)
+		res.end()
 
-        })
-    });
-
-
-
-
+	 })
 
 })
 
 module.exports = router;
+

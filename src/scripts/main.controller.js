@@ -1,7 +1,7 @@
 angular
 .module('scraper')
 
-.controller('main', function($scope, FileUploader, XLSXReaderService, Add) {
+.controller('main', function($scope, FileUploader, Add) {
 
 		var uploader = $scope.uploader = new FileUploader({
 			url: 'api/load'
@@ -39,7 +39,7 @@ angular
         };
         uploader.onCompleteItem = function(fileItem, response, status, headers) {
             console.info('onCompleteItem', fileItem, response, status, headers);
-            // Add.ship(fileItem.file);
+            Add.exportExcel();
         };
         uploader.onCompleteAll = function() {
             console.info('onCompleteAll');

@@ -23,6 +23,8 @@
     "angular-file-upload": "~2.2.0",
     "angular-ui-router": "~0.2.17",
     "js-xlsx": "~0.8.0",
-    "lodash": "~4.2.1"
+    "lodash": "~4.2.1",
+    "filesaver": "*",
+    "file-saver.js": "~1.20150507.2"
   }
 }

@@ -44,14 +44,21 @@
     "body-parser": "^1.14.2",
     "cheerio": "^0.20.0",
     "connect-multiparty": "^2.0.0",
+    "excel-export": "^0.4.1",
     "exceljs": "^0.2.4",
     "express": "^4.13.4",
+    "install": "^0.4.2",
+    "json2xls": "^0.1.1",
     "lodash": "^4.2.1",
+    "mongoose": "^4.4.2",
     "morgan": "^1.6.1",
     "multer": "^1.1.0",
+    "npm": "^3.7.1",
     "phantom": "^0.9.0",
     "request": "^2.69.0",
+    "request-json": "^0.5.5",
     "x-ray": "^2.0.3",
-    "xlsx": "^0.8.0"
+    "xlsx": "^0.8.0",
+    "xlsx-populate": "0.0.4"
   }
 }

@@ -1,22 +1,16 @@
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
-// var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
 
 
-// // ROUTE REQUIRES
-// var userAuthentication = require('./routes/users')
-// var bundle = require('./routes/bundle')
+// ROUTE REQUIRES
 var scraper = require('./routes/scraper')
-// var tag = require('./routes/tag')
-
-
+var exporter = require('./routes/export')
 
 // MIDDLEWARES
-
 app.use(logger('common'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -25,10 +19,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // // PRE-LOGIN ENDPOINTS
-// app.use('/api', userAuthentication)
 app.use('/api', scraper)
-// app.use('/api', bundle)
-// app.use('/api', tag)
+app.use('/api', exporter)
 
 
 // POST LOGIN ENDPOINTS
