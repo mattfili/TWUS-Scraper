@@ -3,6 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var request = require('request');
+var json2xls = require('json2xls');
 var app = express();
 
 
@@ -15,6 +16,7 @@ app.use(logger('common'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
+// app.use(json2xls.middleware);
 
 
 

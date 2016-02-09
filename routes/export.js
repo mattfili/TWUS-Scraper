@@ -14,19 +14,21 @@ var async = require('async');
 var json2xls = require('json2xls');
 var express = require('express');
 var XLSX = require('xlsx');
-
-
 var router = express.Router();
+
+
+
+
 
 router.get('/export', function (req, res, next) {
 
-	// var workbook = XLXS.readFile('data.xlsx')
-	// XLSX.writeFile(workbook, 'finaldata.xlsx')
 
-	var wopts = { bookType:'xlsx', bookSST:false, type:'binary' };
-	var wbout = XLSX.write('data.xlsx',wopts);     
+
+	var wb = XLSX.readFile(__dirname + '/data.xlsx')
+	var wopts = { bookType:'xlsx', bookSST:false, type:'buffer' };
+	var wbout = XLSX.write(wb, wopts);     
 	// Send the buffer:
-	res.send( wbout );
+	res.send(wbout)
 
 });
 

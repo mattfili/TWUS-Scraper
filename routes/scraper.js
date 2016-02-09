@@ -12,8 +12,10 @@ var upload = multer({ dest: 'uploads/' });
 var starTrack = require('../model/commHandler');
 var async = require('async');
 var json2xls = require('json2xls');
-var express = require('express');
 var XLSX = require('xlsx');
+var jsonConcat = require("json-concat");
+
+
 
 
 
@@ -22,17 +24,18 @@ var router = express.Router();
 router.post('/load', multipartMiddleware, function (req, res, next) {
 
 	async.waterfall([
-		function (callback) {
+		function (done) {
 			var workbook = new Excel.Workbook();
 			workbook.xlsx.readFile(req.files.file.path)
+	
 
 		    .then(function() {
 
 		    	var worksheet = workbook.getWorksheet(1)
 		        var colH = worksheet.getColumn(8)
-		        var data = [];
+		        var dataArray = []
 
-		        colH.eachCell(function(cell, rowNumber) {
+		        colH.eachCell({includeEmpty: true}, function(cell, rowNumber) {
 
 		        	var conNoteNumber = cell.value
 
@@ -54,12 +57,13 @@ router.post('/load', multipartMiddleware, function (req, res, next) {
 									time: last['Time'],
 									summary: summary['StatusDescription']
 		        				}
-		        				data.push(conData)       	
+			        			dataArray.push(conData)   
+			     //    			var xls = json2xls(dataArray)
+								// fs.writeFileSync(__dirname+ '/data.xlsx', xls, 'binary')   
 
-		        				var xls = json2xls(data);
-								fs.writeFileSync(__dirname+ 'data.xlsx', xls, 'binary')
-
-		        				callback(null, data)
+								if (dataArray.length == worksheet.lastRow.number -1 ) {
+		 							done(null, dataArray)
+		 						}
 		        			})
 		        		})
 		        	})
@@ -67,11 +71,11 @@ router.post('/load', multipartMiddleware, function (req, res, next) {
 		    })
 		}
 
-	], function (err, data) {
+	], function done(err, dataArray) {
 		// console.log(bundle)
 		if (err) return next(err);
-		// console.log(data)
-		res.send(200)
+		// console.log(dataArray)
+		res.send(dataArray)
 		res.end()
 
 	 })
@@ -79,4 +83,5 @@ router.post('/load', multipartMiddleware, function (req, res, next) {
 })
 
 module.exports = router;
+
 

@@ -25,6 +25,8 @@
     "js-xlsx": "~0.8.0",
     "lodash": "~4.2.1",
     "filesaver": "*",
-    "file-saver.js": "~1.20150507.2"
+    "file-saver.js": "~1.20150507.2",
+    "ng-csv": "~0.3.6",
+    "angular-sanitize": "~1.5.0"
   }
 }

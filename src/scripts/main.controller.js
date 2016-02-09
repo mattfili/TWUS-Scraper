@@ -28,8 +28,7 @@ angular
         };
         uploader.onSuccessItem = function(fileItem, response, status, headers) {
             console.info('onSuccessItem', fileItem, response, status, headers);
-            console.log(fileItem);
-            // Add.ship(fileItem.file);
+
         };
         uploader.onErrorItem = function(fileItem, response, status, headers) {
             console.info('onErrorItem', fileItem, response, status, headers);
@@ -39,13 +38,18 @@ angular
         };
         uploader.onCompleteItem = function(fileItem, response, status, headers) {
             console.info('onCompleteItem', fileItem, response, status, headers);
-            Add.exportExcel();
+           $scope.json = response;
+
         };
         uploader.onCompleteAll = function() {
             console.info('onCompleteAll');
         };
 
         console.info('uploader', uploader);
+
+        $scope.getJson = function () {
+           $scope.json;
+        }
 
      //    $scope.showPreview = false;
 

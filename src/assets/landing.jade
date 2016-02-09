@@ -1,9 +1,10 @@
 .row
-  .col-md-3
+  .col-xs-12
     h3 Select Order file
     input(type='file', nv-file-select='', uploader='uploader')
-  .col-md-9(style='margin-bottom: 40px')
-    h3 File queue
+    hr
+  .col-md-8(style='margin-bottom: 40px')
+    h4 File queue
     p Queue length: {{ uploader.queue.length }}
     table.table
       thead
@@ -43,7 +44,12 @@
         | Queue progress:
         .progress(style='')
           .progress-bar(role='progressbar', ng-style="{ 'width': uploader.progress + '%' }")
+
+svg(ng-if="uploader.progress === 100 && !json" class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg")
+   circle(class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30")
+
 hr
+button.btn.btn-lg.btn-success.col-xs-4.col-xs-offset-4(ng-if="json" ng-csv="json" filename="StarTrack_Consignment-Status" csv-header="['rowNum', 'Con Num', 'Date', 'Time', 'Location', 'Status', 'Summary']") EXCEL IT UP
 //- form(action='', method='post', enctype='multipart/form-data')
 //- 	.form-group
 //- 		label(for='excel_file') Excel File

@@ -1,5 +1,5 @@
 angular
-	.module('scraper', [ 'ui.router', 'angularFileUpload'])
+	.module('scraper', [ 'ui.router', 'angularFileUpload', 'ngSanitize', 'ngCsv'])
 
 	.config(function($stateProvider) {
 	  	$stateProvider
@@ -26,14 +26,15 @@ angular
 			},
 			exportExcel: function () {
 				$http({method: 'GET', url: "/api/export",
-
+				headers: {'Content-Type': "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"},
 		        responseType: "arraybuffer"}).             
 		        success(function(data, status, headers, config) {  
 		            saveAs(new Blob([data],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}), "excel111.xlsx");
 		        }).error(function(data, status, headers, config) {
-		        	
+
 				});  
 			}
 
 		};
 	})
+
