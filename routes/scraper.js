@@ -11,9 +11,6 @@ var multer  = require('multer');
 var upload = multer({ dest: 'uploads/' });
 var starTrack = require('../model/commHandler');
 var async = require('async');
-var json2xls = require('json2xls');
-var XLSX = require('xlsx');
-var jsonConcat = require("json-concat");
 
 
 

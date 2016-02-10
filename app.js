@@ -3,13 +3,11 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var request = require('request');
-var json2xls = require('json2xls');
 var app = express();
 
 
 // ROUTE REQUIRES
 var scraper = require('./routes/scraper')
-var exporter = require('./routes/export')
 
 // MIDDLEWARES
 app.use(logger('common'));
@@ -22,7 +20,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // // PRE-LOGIN ENDPOINTS
 app.use('/api', scraper)
-app.use('/api', exporter)
 
 
 // POST LOGIN ENDPOINTS
