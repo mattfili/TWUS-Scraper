@@ -29,7 +29,7 @@ router.post('/load', multipartMiddleware, function (req, res, next) {
 		    .then(function() {
 
 		    	var worksheet = workbook.getWorksheet(1)
-		        var colH = worksheet.getColumn(8)
+		        var colH = worksheet.getColumn(1)
 		        var dataArray = []
 
 		        colH.eachCell({includeEmpty: true}, function(cell, rowNumber) {
