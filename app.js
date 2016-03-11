@@ -7,7 +7,9 @@ var app = express();
 
 
 // ROUTE REQUIRES
-var scraper = require('./routes/scraper')
+var st = require('./routes/st')
+var tnt = require('./routes/tnt')
+var tntlast = require('./routes/tnt-last')
 
 // MIDDLEWARES
 app.use(logger('common'));
@@ -19,7 +21,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // // PRE-LOGIN ENDPOINTS
-app.use('/api', scraper)
+app.use('/api', st)
+app.use('/api', tnt)
+app.use('/api', tntlast)
 
 
 // POST LOGIN ENDPOINTS

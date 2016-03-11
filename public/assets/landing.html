@@ -1,52 +1,14 @@
 
-<div class="row">
-  <div class="col-xs-12">
-    <h3>Select Order file</h3>
-    <input type="file" nv-file-select="" uploader="uploader"/>
-    <hr/>
-  </div>
-  <div style="margin-bottom: 40px" class="col-md-8">
-    <h4>File queue</h4>
-    <p>Queue length: {{ uploader.queue.length }}</p>
-    <table class="table">
-      <thead>
-        <tr>
-          <th width="50%">Name</th>
-          <th ng-show="uploader.isHTML5">Size</th>
-          <th ng-show="uploader.isHTML5">Progress</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="item in uploader.queue">
-          <td><strong>{{ item.file.name }}</strong></td>
-          <td ng-show="uploader.isHTML5" nowrap="">{{ item.file.size/1024/1024|number:2 }} MB</td>
-          <td ng-show="uploader.isHTML5">
-            <div style="margin-bottom: 0;" class="progress">
-              <div role="progressbar" ng-style="{ 'width': item.progress + '%' }" class="progress-bar"></div>
-            </div>
-          </td>
-          <td class="text-center"><span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span><span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span><span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span></td>
-          <td nowrap="">
-            <button type="button" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-upload"></span> Upload</button>
-            <button type="button" ng-click="item.cancel()" ng-disabled="!item.isUploading" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-ban-circle"></span> Cancel</button>
-            <button type="button" ng-click="item.remove()" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Remove</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div>
-      <div>Queue progress:
-        <div style="" class="progress">
-          <div role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" class="progress-bar"></div>
-        </div>
-      </div>
-    </div>
+<h2 class="text-center">Transport Works US </h2><br/><br/><br/>
+<div class="col-xs-6">
+  <div class="card card-block">
+    <h4 class="card-title">TNT Consignment Reporting</h4>
+    <p class="card-text">Generate report of tracking events for TNT Express in Excel</p><a ui-sref="tnt.view" class="btn btn-primary">TNT Reporting</a>
   </div>
 </div>
-<svg ng-if="uploader.progress === 100 &amp;&amp; !json" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg" class="spinner">
-  <circle fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30" class="path"></circle>
-</svg>
-<hr/>
-<button ng-if="json" ng-csv="json" filename="StarTrack_Consignment-Status" csv-header="['rowNum', 'Con Num', 'Date', 'Time', 'Location', 'Status', 'Summary']" class="btn btn-lg btn-success col-xs-4 col-xs-offset-4">EXCEL IT UP</button>
+<div class="col-xs-6">
+  <div class="card card-block">
+    <h4 class="card-title">Startrack Consignment Reporting</h4>
+    <p class="card-text">Generate report of tracking events for Startrack in Excel</p><a ui-sref="startrack" class="btn btn-primary">Startrack Reporting</a>
+  </div>
+</div>

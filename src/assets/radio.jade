@@ -1,0 +1,16 @@
+section.tnt
+  h2 TNT Consignment Reporting
+  .row
+    .col-xs-12(style='margin-bottom: 40px')
+      h3 Select Report Type
+      .radio
+        input(type='radio' ng-model='report' value="all") 
+        label Display all tracking events
+      .radio
+        input(type='radio' ng-model='report' value="last")
+        label Display last tracking event only
+
+          div(ng-if="report == 'all'")
+            ui-view(name="tnt" )
+          div(ng-if="report == 'last'")
+            ui-view(name="tntlast")

@@ -1,0 +1,38 @@
+section.st
+  h3 Star Track Consignment Reporting
+  .row
+    .col-xs-12
+      h3 Select Order file
+      input(type='file', nv-file-select='', uploader='uploader')
+    br
+    br
+    br
+    hr
+    .col-xs-12
+      table.table
+        thead
+          tr
+            th(width='50%') Name
+            th(ng-show='uploader.isHTML5') Size
+            th(ng-show='uploader.isHTML5') Progress
+            th Actions
+        tbody
+          tr(ng-repeat='item in uploader.queue')
+            td
+              strong {{ item.file.name }}
+            td(ng-show='uploader.isHTML5', nowrap='') {{ item.file.size/1024/1024|number:2 }} MB
+            td(ng-show='uploader.isHTML5')
+              .progress(style='margin-bottom: 0;')
+                .progress-bar(role='progressbar', ng-style="{ 'width': item.progress + '%' }")
+            td(nowrap='')
+              button.btn.btn-success.btn-xs(type='button', ng-click='item.upload()', ng-disabled='item.isReady || item.isUploading || item.isSuccess')
+                span.glyphicon.glyphicon-upload
+                |  Upload
+              button.btn.btn-danger.btn-xs(type='button', ng-click='item.remove()')
+                span.glyphicon.glyphicon-trash
+                |  Remove
+
+  svg(ng-if="uploader.progress === 100 && !json" class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg")
+     circle(class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30")
+
+  button.btn.btn-lg.btn-success.col-xs-4.col-xs-offset-4(ng-if="json" ng-csv="json" filename="StarTrack_Consignment-Status" csv-header="['rowNum', 'Con Num', 'Date', 'Time', 'Location', 'Status', 'Summary']") Generate Excel

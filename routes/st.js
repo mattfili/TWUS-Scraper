@@ -9,7 +9,7 @@ var multipartMiddleware = multipart();
 var Excel = require("exceljs");
 var multer  = require('multer');
 var upload = multer({ dest: 'uploads/' });
-var starTrack = require('../model/commHandler');
+var starTrack = require('../controller/commHandler');
 var async = require('async');
 
 
@@ -18,7 +18,7 @@ var async = require('async');
 
 var router = express.Router();
 
-router.post('/load', multipartMiddleware, function (req, res, next) {
+router.post('/st', multipartMiddleware, function (req, res, next) {
 
 	async.waterfall([
 		function (done) {

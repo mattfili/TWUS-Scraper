@@ -173,7 +173,19 @@ module.exports = function(grunt) {
       },
       tasks: ['nodemon', 'watch']
     },
+    mocha: {
+      all: {
+        src: ['routes/tnt.spec.js'],
+      },
+      options: {
+        run: true
+      }
+    }
   });
+
+  grunt.registerTask('test', [
+    'mocha'
+  ])
 
   grunt.registerTask('build', [
     'clean',

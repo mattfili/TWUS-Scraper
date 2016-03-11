@@ -1,13 +1,41 @@
 angular
 	.module('scraper', [ 'ui.router', 'angularFileUpload', 'ngSanitize', 'ngCsv'])
 
-	.config(function($stateProvider) {
+	.config(function($stateProvider, $urlRouterProvider) {
+
+		// $urlRouterProvider.when('', 'home');
+		// $urlRouterProvider.otherwise('/home')
+
 	  	$stateProvider
 		    .state('index', {
-		      url: "",
-      		  templateUrl: "./assets/landing.html",
-      		  controller: "main",
-      		  controllerAs: "main"
+		      url: "/home",
+      		  templateUrl: "./assets/landing.html"
+		    })
+		    .state('tnt', {
+		      url: "/tnt",
+		      templateUrl: './assets/radio.html',
+		      abstract: true
+		    })
+		    .state('tnt.view', {
+		    	url: '/other',
+				views: {
+					'tnt': {
+						templateUrl: './assets/tnt.html',
+						controller: 'tnt',
+						controllerAs: 'tnt'
+					},
+					'tntlast': {
+						templateUrl: './assets/tntlast.html',
+						controller: 'tntlast',
+						controllerAs: 'tntlast'
+					}
+				}
+		    })
+		    .state('startrack', {
+		      url: "/startrack",
+      		  templateUrl: "./assets/startrack.html",
+      		  controller: "startrack",
+      		  controllerAs: "startrack"
 		    })
 	})
 
