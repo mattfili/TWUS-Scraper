@@ -3,7 +3,7 @@ angular
 
 	.config(function($stateProvider, $urlRouterProvider) {
 
-		// $urlRouterProvider.when('', 'home');
+		$urlRouterProvider.when('', '/home');
 		$urlRouterProvider.otherwise('/home')
 
 	  	$stateProvider
