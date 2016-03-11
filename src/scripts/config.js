@@ -4,7 +4,7 @@ angular
 	.config(function($stateProvider, $urlRouterProvider) {
 
 		// $urlRouterProvider.when('', 'home');
-		// $urlRouterProvider.otherwise('/home')
+		$urlRouterProvider.otherwise('/home')
 
 	  	$stateProvider
 		    .state('index', {
