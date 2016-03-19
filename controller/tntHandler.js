@@ -21,7 +21,7 @@ module.exports.getTNT = function (con, cb) {
 				conArray[i] = $(this).text()
 			})
 
-			if (!conArray || conArray[0].split(' ')[0] == 'No') {
+			if (!conArray || !conArray.length || conArray[0].split(' ')[0] == 'No') {
 				cb('No Data for consignment number ' + con)
 			} else {
 
