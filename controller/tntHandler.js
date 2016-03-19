@@ -12,7 +12,7 @@ module.exports.getTNT = function (con, cb) {
 	request.get(htmlAPI + con, function (error, response, body) {
 		var conArray = []
 		var dataArray = []
-		if (error) { return error}
+		if (error) { cb(error)}
 		else if (!error) {
 
 			var $ = cheerio.load(body)
@@ -20,6 +20,10 @@ module.exports.getTNT = function (con, cb) {
 			$('.f2').each(function(i, elem) {
 				conArray[i] = $(this).text()
 			})
+
+			if (!conArray || conArray[0].split(' ')[0] == 'No') {
+				cb('No Data for consignment number ' + con)
+			} else {
 
 			var consignment = _
                 .chain(conArray)
@@ -54,6 +58,7 @@ module.exports.getTNT = function (con, cb) {
 
 
 			cb(dataArray)
+		}
 		}
 	})
 }

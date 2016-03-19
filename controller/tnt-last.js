@@ -21,11 +21,10 @@ module.exports.getTNT = function (con, cb) {
 			$('.f2').each(function(i, elem) {
 				conArray[i] = $(this).text()
 			})
-			var pattern = new Regex(/(No data)/i)
 
-			// console.log(pattern.test(conArray[0]))
+			console.log(conArray)
 
-			if (!conArray || conArray[0].split(' ')[0] == 'No') {
+			if (!conArray || !conArray.length || conArray[0].split(' ')[0] == 'No') {
 				cb('No Data for consignment number ' + con)
 			} else {
 
