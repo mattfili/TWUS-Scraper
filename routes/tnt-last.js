@@ -43,7 +43,7 @@ router.post('/tntlast', multipartMiddleware, function (req, res, next) {
 
                 dataArray.push(data)
 
-                console.log(dataArray.length)
+                // console.log(data)
 
               if (dataArray.length == worksheet.lastRow.number -1) {
                   done(null, dataArray)
