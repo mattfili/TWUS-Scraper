@@ -34,6 +34,6 @@
     <circle fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30" class="path"></circle>
   </svg>
   <center>
-    <button ng-if="json" ng-csv="json" filename="TNT_Express-LatestInfo" csv-header="['Consignment', 'Status', 'Date', 'Time', 'Depot']" class="btn btn-lg btn-success col-xs-4">Generate Excel</button>
+    <button ng-if="json" ng-csv="json" filename="TNT_Express_LatestInfo_{{date}}.csv" csv-header="['Consignment', 'Status', 'Date', 'Time', 'Depot']" class="btn btn-lg btn-success col-xs-4">Generate Excel</button>
   </center>
 </div>

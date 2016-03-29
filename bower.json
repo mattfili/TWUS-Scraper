@@ -27,6 +27,7 @@
     "filesaver": "*",
     "file-saver.js": "~1.20150507.2",
     "ng-csv": "~0.3.6",
-    "angular-sanitize": "~1.5.0"
+    "angular-sanitize": "~1.5.0",
+    "moment": "~2.12.0"
   }
 }

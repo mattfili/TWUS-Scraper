@@ -22,10 +22,17 @@ module.exports.getTNT = function (con, cb) {
 				conArray[i] = $(this).text()
 			})
 
-			console.log(conArray)
+			// console.log(conArray)
 
 			if (!conArray || !conArray.length || conArray[0].split(' ')[0] == 'No') {
-				cb('No Data for consignment number ' + con)
+				sendObj = {
+                  conNum: con,
+                  status: 'Consignment number error',
+                  date: '',
+                  time: '',
+                  depot: ''
+		        }
+		        cb(sendObj)
 			} else {
 
 				var consignment = _

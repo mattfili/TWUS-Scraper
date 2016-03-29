@@ -13,9 +13,6 @@ var starTrack = require('../controller/commHandler');
 var async = require('async');
 
 
-
-
-
 var router = express.Router();
 
 router.post('/st', multipartMiddleware, function (req, res, next) {
@@ -32,38 +29,55 @@ router.post('/st', multipartMiddleware, function (req, res, next) {
 		        var colH = worksheet.getColumn(1)
 		        var dataArray = []
 
-		        colH.eachCell({includeEmpty: true}, function(cell, rowNumber) {
+		        colH.eachCell({includeEmpty: false}, function(cell, rowNumber) {
+		        	if (rowNumber == 1) {
+		        		return
+		        	} else {
+			        	var conNoteNumber = cell.value
 
-		        	var conNoteNumber = cell.value
+			        	starTrack.getGuid(conNoteNumber, function (guid) {
 
-		        	starTrack.getGuid(conNoteNumber, function (guid) {
+			        		if (!guid.length) {
+			        			var conData = {
+			        				rowNum: rowNumber,
+			        				conNum: conNoteNumber,
+									date: '',
+									time: '',
+									location: '',
+									status: '',
+									time: '',
+									summary: 'Consignment Number Error'
+			        			}
+			        			dataArray.push(conData)
+			        		} else {
 
-		        		starTrack.getConEvents(guid[0], function (events) {
+				        		starTrack.getConEvents(guid[0], function (events) {
 
-		        		var last =	_.last(events)
-		 
-		        			starTrack.getConSummary(guid[0], function (summary) {
+				        		var last =	_.last(events)
+				 
+				        			starTrack.getConSummary(guid[0], function (summary) {
 
-		        				var conData = {
-		        					rowNum: rowNumber,
-									conNum: conNoteNumber,
-									date: last['EventDate'],
-									time: last['Time'],
-									location: last['Location'],
-									status: last['Status'],
-									time: last['Time'],
-									summary: summary['StatusDescription']
-		        				}
-			        			dataArray.push(conData)   
-			     //    			var xls = json2xls(dataArray)
-								// fs.writeFileSync(__dirname+ '/data.xlsx', xls, 'binary')   
+				        				var conData = {
+				        					rowNum: rowNumber,
+											conNum: conNoteNumber,
+											date: last['EventDate'],
+											time: last['Time'],
+											location: last['Location'],
+											status: last['Status'],
+											time: last['Time'],
+											summary: summary['StatusDescription']
+				        				}
+					        			dataArray.push(conData)   
 
-								if (dataArray.length == worksheet.lastRow.number -1 ) {
-		 							done(null, dataArray)
-		 						}
-		        			})
-		        		})
-		        	})
+
+										if (dataArray.length == worksheet.lastRow.number -1) {
+				 							done(null, dataArray)
+				 						}
+				        			})
+				        		})
+			        		}
+			        	})
+		        	}
 		        })
 		    })
 		}
@@ -81,4 +95,5 @@ router.post('/st', multipartMiddleware, function (req, res, next) {
 
 module.exports = router;
 
-
+			     //    			var xls = json2xls(dataArray)
+								// fs.writeFileSync(__dirname+ '/data.xlsx', xls, 'binary')   

@@ -51,6 +51,8 @@ angular
            $scope.json;
         }
 
+        $scope.date = moment().format('L')
+
 })
 
 .controller('tntlast', function($scope, FileUploader, Add) {
@@ -103,6 +105,8 @@ angular
            $scope.json;
         }
 
+        $scope.date = moment().format('L')
+
 })
 
 .controller('startrack', function($scope, FileUploader, Add) {
@@ -154,5 +158,7 @@ angular
         $scope.getJson = function () {
            $scope.json;
         }
+
+        $scope.date = moment().format('L')
 
 })
