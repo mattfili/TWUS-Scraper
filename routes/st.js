@@ -60,12 +60,12 @@ router.post('/st', multipartMiddleware, function (req, res, next) {
 				        				var conData = {
 				        					rowNum: rowNumber,
 											conNum: conNoteNumber,
-											date: last['EventDate'],
-											time: last['Time'],
-											location: last['Location'],
-											status: last['Status'],
-											time: last['Time'],
-											summary: summary['StatusDescription']
+											date: last['EventDate'] || 'No Date',
+											time: last['Time'] || 'No Time',
+											location: last['Location'] || 'No Location',
+											status: last['Status'] || 'No Status',
+											time: last['Time'] || 'No Time',
+											summary: summary['StatusDescription'] || 'No Summary'
 				        				}
 					        			dataArray.push(conData)   
 
